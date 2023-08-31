@@ -118,9 +118,33 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteALL = (req, res) => {
-
+  Item.destroy({
+    where: {},
+    truncate: false
+  })
+  .then(nums =>{
+    res.send({ message :`${nums} Itens foram apagados com sucessos.`});
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+      err.message || "Algum erro ocorreu ao tentar apagar todos os itens."
+    })
+  })
 };
 
 exports.findAllflammabes = (req, res) => {
-
+  Item.findAllflammabes({
+    where: {isflammable: true}
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+      err.message || "Alguem erro ocorreu ao tentar pesquisar todos os itens inflamáveis."
+    })
+  })
+  
 };

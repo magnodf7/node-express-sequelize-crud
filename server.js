@@ -22,8 +22,10 @@ db.sequelize.sync()
         console.log("Falha ao acessar banco de dados:" +err.message);
     })
 
+    require("./app/routes/items.routes")(app);
+
 app.get("/", (req,res)=>{
-    res.json({message: 'Hello word!!'})
+    res.json({message: 'Hello World!!'})
 });
 
 const PORT = process.env.PORT || 8080;
